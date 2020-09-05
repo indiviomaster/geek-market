@@ -10,7 +10,7 @@ public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Long id;
+    private int id;
 
     @Column(name = "title")
     private String title;
@@ -19,6 +19,5 @@ public class Book {
     private String description;
 
     @Column(name = "year")
-    //  @Temporal(TemporalType.DATE)
     private int year;
 }

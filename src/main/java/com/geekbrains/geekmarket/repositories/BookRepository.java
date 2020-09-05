@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface BookRepository extends PagingAndSortingRepository <Book, Long>{
+public interface BookRepository extends PagingAndSortingRepository <Book, Integer>{
     List<Book> findAll();
-    Optional<Book> findById(Long id);
+    Optional<Book> findById(int id);
 }

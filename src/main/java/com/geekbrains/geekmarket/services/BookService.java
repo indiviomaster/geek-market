@@ -25,7 +25,7 @@ public class BookService {
         return pr.stream().collect(Collectors.toList());
     }
 
-    public Book getBookById(Long id) {
+    public Book getBookById(int id) {
         Optional<Book> book = bookRepository.findById(id);
         if (book.isPresent()) {
             return book.get();
