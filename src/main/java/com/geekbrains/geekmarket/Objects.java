@@ -4,6 +4,8 @@ import java.util.List;
 
 public class Objects {
     int id;
+    Integer parId;
+    List <Objects> children;
 
     @Override
     public String toString() {
@@ -44,6 +46,5 @@ public class Objects {
         this.children = children;
     }
 
-    Integer parId;
-    List <Objects> children;
+
 }

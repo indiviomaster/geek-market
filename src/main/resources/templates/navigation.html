@@ -28,22 +28,27 @@
                     <a class="nav-link" th:href="@{/admin}">Управление</a>
                 </li>
                 <li class="nav-item" th:classappend="${activeTab == 'Home' ? 'active' : ''}">
-                    <a class="nav-link" th:href="@{/}">@GeekMarket<span class="sr-only">(current)</span></a>
+                    <a class="nav-link" th:href="@{/}">@Market<span class="sr-only">(current)</span></a>
                 </li>
-                <!--<li class="nav-item" th:classappend="${activeTab == 'Shop' ? 'active' : ''}">-->
-                    <!--<a class="nav-link" th:href="@{/shop}">Каталог товаров<span class="sr-only">(current)</span></a>-->
-                <!--</li>-->
-                <!--<li class="nav-item" th:classappend="${activeTab == 'ShoppingCart' ? 'active' : ''}">-->
-                    <!--<a class="nav-link" th:href="@{/shop/cart}">Корзина<span class="sr-only">(current)</span></a>-->
-                <!--</li>-->
+                <li class="nav-item" th:classappend="${activeTab == 'Shop' ? 'active' : ''}">
+                    <a class="nav-link" th:href="@{/shop}">Каталог товаров<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item" th:classappend="${activeTab == 'ShoppingCart' ? 'active' : ''}">
+                    <a class="nav-link" th:href="@{/shop/cart}">Корзина<span class="sr-only">(current)</span></a>
+                </li>
+
+                <li class="nav-item" th:classappend="${activeTab == 'RegistrationForm' ? 'active' : ''}">
+                    <a class="nav-link" th:href="@{/register/showRegistrationForm}">Добавить пользователя<span class="sr-only">(current)</span></a>
+                </li>
+
                 <div sec:authorize="isAnonymous()">
                     <a class="nav-link" th:href="@{/login}">Войти</a>
                 </div>
-<!--                <div sec:authorize="isAuthenticated()">-->
-<!--                    <li class="nav-item" th:classappend="${activeTab == 'Profile' ? 'active' : ''}">-->
-<!--                        <a class="nav-link" th:href="@{/profile}">Профиль</a>-->
-<!--                    </li>-->
-<!--                </div>-->
+                <div sec:authorize="isAuthenticated()">
+                    <li class="nav-item" th:classappend="${activeTab == 'Profile' ? 'active' : ''}">
+                        <a class="nav-link" th:href="@{/profile}">Профиль</a>
+                    </li>
+                </div>
                 <div sec:authorize="isAuthenticated()">
                     <li class="nav-item">
                         <form th:action="@{/logout}" method="POST">

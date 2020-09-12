@@ -2,6 +2,7 @@ package com.geekbrains.geekmarket.services;
 
 import com.geekbrains.geekmarket.entities.Product;
 import com.geekbrains.geekmarket.repositories.ProductRepository;
+import com.geekbrains.geekmarket.utils.ProductNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -37,4 +38,24 @@ public class ProductService {
         }
         return null;
     }
+
+
+
+    public Product saveOrUpdate(Product product) {
+        return productRepository.save(product);
+    }
+
+    public void delete(Long id) {
+        Optional<Product> product = productRepository.findById(id);
+        if (!product.isPresent()) {
+            throw new ProductNotFoundException("Product with id = " + id + " not found");
+        }
+        productRepository.delete(product.get());
+    }
+
+    public List<Product> getAllProductsList() {
+        return (List<Product>) productRepository.findAll();
+    }
+
+
 }

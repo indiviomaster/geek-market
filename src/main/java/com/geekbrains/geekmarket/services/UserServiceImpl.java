@@ -1,6 +1,7 @@
 package com.geekbrains.geekmarket.services;
 
 import com.geekbrains.geekmarket.entities.Role;
+import com.geekbrains.geekmarket.entities.SystemUser;
 import com.geekbrains.geekmarket.entities.User;
 import com.geekbrains.geekmarket.repositories.RoleRepository;
 import com.geekbrains.geekmarket.repositories.UserRepository;
@@ -13,6 +14,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
@@ -58,4 +60,23 @@ public class UserServiceImpl implements UserService {
 	private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role> roles) {
 		return roles.stream().map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList());
 	}
+
+	@Override
+	@Transactional
+	public void save(SystemUser systemUser) {
+		//перекладываем при создании пользователя
+		User user = new User();
+		user.setUserName(systemUser.getUserName());
+		user.setPassword(passwordEncoder.encode(systemUser.getPassword()));
+		user.setFirstName(systemUser.getFirstName());
+		user.setLastName(systemUser.getLastName());
+		user.setEmail(systemUser.getEmail());
+		user.setPhone(systemUser.getPhone());
+
+		user.setRoles(Arrays.asList(roleRepository.findOneByName("ROLE_USER")));
+
+		//стандартный метод не требуется определять
+		userRepository.save(user);
+	}
+
 }
