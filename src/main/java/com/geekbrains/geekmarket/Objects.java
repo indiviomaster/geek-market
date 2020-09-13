@@ -4,22 +4,22 @@ import java.util.List;
 
 public class Objects {
     int id;
-    Integer parId;
-    List <Objects> children;
+    Integer parentId;
+    List <Objects> childrenList;
 
     @Override
     public String toString() {
         return "Objects{" +
                 "id=" + id +
-                ", parId=" + parId +
-                ", children=" + children +
+                ", parentId=" + parentId +
+                ", List of children=" + childrenList +
                 '}';
     }
 
-    public Objects(int id, Integer parId, List<Objects> children) {
+    public Objects(int id, Integer parentId, List<Objects> childrenList) {
         this.id = id;
-        this.parId = parId;
-        this.children = children;
+        this.parentId = parentId;
+        this.childrenList = childrenList;
     }
 
     public int getId() {
@@ -30,21 +30,33 @@ public class Objects {
         this.id = id;
     }
 
-    public Integer getParId() {
-        return parId;
+    public Integer getParentId() {
+        return parentId;
     }
 
-    public void setParId(Integer parId) {
-        this.parId = parId;
+    public void setParentId(Integer parentId) {
+        this.parentId = parentId;
     }
 
-    public List<Objects> getChildren() {
-        return children;
+    public List<Objects> getChildrenList() {
+        return childrenList;
     }
 
-    public void setChildren(List<Objects> children) {
-        this.children = children;
+    public void setChildrenList(List<Objects> childrenList) {
+        this.childrenList = childrenList;
     }
 
+    public void addChildren(Objects ch){
+        this.childrenList.add(ch);
+    }
+    public Objects getChildren(int id) {
 
+        for (Objects child: childrenList){
+            if(child.id == id){
+                return child;
+            }
+        }
+        return null;
+
+    }
 }

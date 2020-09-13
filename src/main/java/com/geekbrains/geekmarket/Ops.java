@@ -5,14 +5,13 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
 import static java.lang.Integer.parseInt;
 
 public class Ops {
     public static void main(String[] args) {
-        Map<Integer, Objects> obj = new HashMap<>();
+        List <Objects> listObjects = new ArrayList<>();
         BufferedReader bufferedReader = null;
         try {
             bufferedReader = new BufferedReader(new FileReader("C:\\java\\geek-market\\src\\main\\resources\\objects.txt"));
@@ -29,17 +28,45 @@ public class Ops {
             splitline = currentLine.split("\\s");
 
 
-            int idf = parseInt(splitline[0]);
-            Integer id2f;
+            int objId = parseInt(splitline[0]);
+            Integer objParentId;
             if(splitline[1].equals("null")){
-                id2f = null;
+                objParentId = null;
             }else {
-                id2f = parseInt(splitline[1]);
+                objParentId = parseInt(splitline[1]);
             }
 
-            obj.put(idf,new Objects(idf,id2f,null));
+            if (objParentId!=null){
+                System.out.println("Поиск в листе");
+                for(Objects obj : listObjects)
+
+                {
+                    System.out.println("ObjID="+obj.getId()+" ObjParId= "+objParentId);
+                    if(obj.getId() == objParentId){
+                        System.out.println(obj);
+                        Objects chd = new Objects(objId,objParentId,null);
+                        System.out.println("Новый ребенок" + chd);
+
+                        obj.addChildren(chd);
 
 
+                    } else {
+                        System.out.println("par = "+objParentId);
+                       if(!obj.getChildrenList().isEmpty()) {
+                           System.out.println("OBJ ID"+obj.getId());
+                           for (Objects ch : obj.getChildrenList()) {
+                               if (ch != null && ch.getId() == objParentId)
+                                   ch.addChildren(new Objects(objId, objParentId, null));
+                           }
+                       }else{
+                           System.out.println("потомков нет" + obj.getId());
+                       }
+                    }
+                }
+            }else{
+                listObjects.add(new Objects(objId,objParentId,null));
+                System.out.println("Новый родитель" + new Objects(objId,objParentId,null));
+            }
         }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
