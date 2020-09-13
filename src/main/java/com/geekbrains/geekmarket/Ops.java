@@ -27,7 +27,6 @@ public class Ops {
 
             splitline = currentLine.split("\\s");
 
-
             int objId = parseInt(splitline[0]);
             Integer objParentId;
             if(splitline[1].equals("null")){
@@ -37,37 +36,27 @@ public class Ops {
             }
 
             if (objParentId!=null){
-                System.out.println("Поиск в листе");
                 for(Objects obj : listObjects)
-
                 {
-                    System.out.println("ObjID="+obj.getId()+" ObjParId= "+objParentId);
                     if(obj.getId() == objParentId){
-                        System.out.println(obj);
                         Objects chd = new Objects(objId,objParentId,null);
-                        System.out.println("Новый ребенок" + chd);
-
                         obj.addChildren(chd);
-
-
                     } else {
-                        System.out.println("par = "+objParentId);
-                       if(!obj.getChildrenList().isEmpty()) {
-                           System.out.println("OBJ ID"+obj.getId());
+                       if(obj.getChildrenList()!= null) {
                            for (Objects ch : obj.getChildrenList()) {
-                               if (ch != null && ch.getId() == objParentId)
+                               if (ch != null && ch.getId() == objParentId){
                                    ch.addChildren(new Objects(objId, objParentId, null));
+                               }
                            }
-                       }else{
-                           System.out.println("потомков нет" + obj.getId());
                        }
                     }
                 }
             }else{
                 listObjects.add(new Objects(objId,objParentId,null));
-                System.out.println("Новый родитель" + new Objects(objId,objParentId,null));
             }
+
         }
+            System.out.println(listObjects);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }

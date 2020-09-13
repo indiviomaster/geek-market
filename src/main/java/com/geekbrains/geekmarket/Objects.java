@@ -1,11 +1,13 @@
 package com.geekbrains.geekmarket;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Objects {
     int id;
     Integer parentId;
     List <Objects> childrenList;
+
 
     @Override
     public String toString() {
@@ -47,6 +49,10 @@ public class Objects {
     }
 
     public void addChildren(Objects ch){
+        if(this.childrenList == null){
+            this.childrenList = new ArrayList<>();
+        }
+
         this.childrenList.add(ch);
     }
     public Objects getChildren(int id) {
