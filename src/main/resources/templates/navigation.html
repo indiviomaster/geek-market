@@ -36,6 +36,9 @@
                 <li class="nav-item" th:classappend="${activeTab == 'ShoppingCart' ? 'active' : ''}">
                     <a class="nav-link" th:href="@{/cart}">Корзина<span class="sr-only">(current)</span></a>
                 </li>
+                <li class="nav-item" th:classappend="${activeTab == 'Order' ? 'active' : ''}">
+                    <a class="nav-link" th:href="@{/order/}">Заказ<span class="sr-only">(current)</span></a>
+                </li>
                 <li class="nav-item" th:classappend="${activeTab == 'RegistrationForm' ? 'active' : ''}">
                     <a class="nav-link" th:href="@{/register/showRegistrationForm}">Добавить пользователя<span class="sr-only">(current)</span></a>
                 </li>
