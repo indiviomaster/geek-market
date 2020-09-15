@@ -23,9 +23,6 @@ public class Product {
     @Column(name = "vendor_code")
     private String vendorCode;
 
-//    @Column(name = "image")
-//    private String imagePath;
-
     @Column(name = "title")
     private String title;
 

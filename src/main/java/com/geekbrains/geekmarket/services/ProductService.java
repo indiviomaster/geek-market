@@ -23,7 +23,7 @@ public class ProductService {
 
     public List<Product> getAllProducts() {
         Page<Product> pr = productRepository.findAll(PageRequest.of(0,10));
-        System.out.println(pr);
+        //System.out.println(pr);
         return pr.stream().collect(Collectors.toList());
     }
 

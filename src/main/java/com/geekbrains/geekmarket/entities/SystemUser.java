@@ -2,6 +2,7 @@ package com.geekbrains.geekmarket.entities;
 
 import com.geekbrains.geekmarket.utils.FieldMatch;
 import com.geekbrains.geekmarket.utils.ValidEmail;
+import com.geekbrains.geekmarket.utils.ValidPassword;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -19,10 +20,12 @@ public class SystemUser {
 //    @Pattern(regexp = "^[a-zA-Z0-9]{5}", message = "only 5 letters/digits")
     private String userName;
 
+    @ValidPassword
     @NotNull(message = "требуется")
     @Size(min = 1, message = "требуется")
     private String password;
 
+    @ValidPassword
     @NotNull(message = "требуется")
     @Size(min = 1, message = "требуется")
     private String matchingPassword;

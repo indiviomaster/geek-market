@@ -9,7 +9,7 @@ import java.util.List;
 
 import static java.lang.Integer.parseInt;
 
-public class Ops {
+public class Tree {
     public static void main(String[] args) {
         List <Objects> listObjects = new ArrayList<>();
         BufferedReader bufferedReader = null;
@@ -38,18 +38,8 @@ public class Ops {
             if (objParentId!=null){
                 for(Objects obj : listObjects)
                 {
-                    if(obj.getId() == objParentId){
-                        Objects chd = new Objects(objId,objParentId,null);
-                        obj.addChildren(chd);
-                    } else {
-                       if(obj.getChildrenList()!= null) {
-                           for (Objects ch : obj.getChildrenList()) {
-                               if (ch != null && ch.getId() == objParentId){
-                                   ch.addChildren(new Objects(objId, objParentId, null));
-                               }
-                           }
-                       }
-                    }
+                    find(obj,objId,objParentId);
+
                 }
             }else{
                 listObjects.add(new Objects(objId,objParentId,null));
@@ -66,6 +56,21 @@ public class Ops {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        }
+
+
+    }
+
+    static void  find(Objects obj, int objId,int objParentId){
+        if(obj.getId() == objParentId){
+            //если родитель нашелся добавляем ему ребенка
+            obj.addChildren(new Objects(objId,objParentId,null));
+        }else {
+            if(obj.getChildrenList()!= null) {//ищем в детях
+                for (Objects ch : obj.getChildrenList()) {
+                    find( ch, objId, objParentId);
+                }
+            }else{return;}
         }
 
 
