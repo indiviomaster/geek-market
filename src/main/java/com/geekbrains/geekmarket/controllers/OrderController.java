@@ -43,10 +43,10 @@ public class OrderController {
         return "order";
     }
 
-    @PostMapping("/accept")
+    /*@PostMapping("/accept")
     public Category addOrder(@RequestBody Order order) {
         order.setId(0L);
         order = orderService.saveOrUpdate(order);
         return order;
-    }
+    }*/
 }
