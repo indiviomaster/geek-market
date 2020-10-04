@@ -1,40 +1,65 @@
 package com.geekbrains.geekmarket.services;
 
-import com.geekbrains.geekmarket.entities.Product;
+import com.geekbrains.geekmarket.entities.Order;
+import com.geekbrains.geekmarket.entities.OrderItem;
+
+import com.geekbrains.geekmarket.entities.User;
+import com.geekbrains.geekmarket.repositories.OrderRepository;
 import com.geekbrains.geekmarket.utils.ShoppingCart;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.servlet.http.HttpSession;
+
+import javax.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class OrderService {
+    private OrderRepository orderRepository;
 
-    private ShoppingCartService shoppingCartService;
-    @Autowired
-    public void setShoppingCartService(ShoppingCartService shoppingCartService) {
-        this.shoppingCartService = shoppingCartService;
-    }
-
-    private ProductService productService;
+    private OrderStatusService orderStatusService;
 
     @Autowired
-    public void setProductService(ProductService productService) {
-        this.productService = productService;
+    public void setOrderRepository(OrderRepository orderRepository) {
+        this.orderRepository = orderRepository;
     }
 
+    @Autowired
+    public void setOrderStatusService(OrderStatusService orderStatusService) {
+        this.orderStatusService = orderStatusService;
+    }
 
-    public ShoppingCart getCurrentCart(HttpSession session) {
-        ShoppingCart cart = (ShoppingCart) session.getAttribute("cart");
-        if (cart == null) {
-            cart = new ShoppingCart();
-            session.setAttribute("cart", cart);
+    @Transactional
+    public Order makeOrder(ShoppingCart cart, User user) {
+        Order order = new Order();
+        order.setId(0L);
+        order.setUser(user);
+        order.setStatus(orderStatusService.getStatusById(1L));
+        order.setPrice(cart.getTotalCost());
+        order.setOrderItems(new ArrayList<>(cart.getItems()));
+        for (OrderItem o : cart.getItems()) {
+            o.setOrder(order);
         }
-        return cart;
+        return order;
     }
 
+    public List<Order> getAllOrders() {
+        return (List<Order>) orderRepository.findAll();
+    }
 
+    public Order findById(Long id) {
+        return orderRepository.findById(id).get();
+    }
 
+    public Order saveOrder(Order order) {
+        Order orderOut = orderRepository.save(order);
+        orderOut.setConfirmed(true);
+        return orderOut;
+    }
 
-
+    public Order changeOrderStatus(Order order, Long statusId) {
+        order.setStatus(orderStatusService.getStatusById(statusId));
+        return saveOrder(order);
+    }
 }

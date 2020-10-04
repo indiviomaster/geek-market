@@ -1,6 +1,7 @@
 package com.geekbrains.geekmarket.services;
 
 import com.geekbrains.geekmarket.entities.Category;
+import com.geekbrains.geekmarket.entities.Product;
 import com.geekbrains.geekmarket.repositories.CategoryRepository;
 import com.geekbrains.geekmarket.utils.CategoryNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +36,9 @@ public class CategoryService {
         return null;
     }
 
+    public void saveCategory(Category category) {
+        categoryRepository.save(category);
+    }
     public Category saveOrUpdate(Category category) {
         return categoryRepository.save(category);
     }
@@ -47,4 +51,13 @@ public class CategoryService {
         categoryRepository.delete(category.get());
     }
 
+    public void addCategory(String name){
+        Category cat = new Category();
+        cat.setTitle(name);
+        categoryRepository.save(cat);
+    }
+
+    public boolean isCategoryWithTitleExists(String title) {
+       return categoryRepository.findOneByTitle(title) != null;
+    }
 }

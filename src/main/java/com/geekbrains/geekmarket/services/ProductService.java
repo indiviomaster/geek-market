@@ -6,6 +6,7 @@ import com.geekbrains.geekmarket.utils.ProductNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,24 +23,32 @@ public class ProductService {
     }
 
     public List<Product> getAllProducts() {
-        Page<Product> pr = productRepository.findAll(PageRequest.of(0,10));
-        //System.out.println(pr);
-        return pr.stream().collect(Collectors.toList());
+        return (List<Product>)(productRepository.findAll());
     }
 
-    public List<Product> getProductsByVendorCode(String code) {
-        return productRepository.findAllByVendorCode(code);
+    public List<Product> getAllProductsWithFilter(Specification<Product> productSpecs) {
+        return (List<Product>)(productRepository.findAll(productSpecs));
     }
 
     public Product getProductById(Long id) {
-        Optional<Product> product = productRepository.findById(id);
-        if (product.isPresent()) {
-            return product.get();
-        }
-        return null;
+        return productRepository.findById(id).orElse(null);
     }
 
+    public Page<Product> getAllProductsByPage(int pageNumber, int pageSize) {
+        return productRepository.findAll(PageRequest.of(pageNumber, pageSize));
+    }
 
+    public Page<Product> getProductsWithPagingAndFiltering(int pageNumber, int pageSize, Specification<Product> productSpecification) {
+        return productRepository.findAll(productSpecification, PageRequest.of(pageNumber, pageSize));
+    }
+
+    public boolean isProductWithTitleExists(String productTitle) {
+        return productRepository.findOneByTitle(productTitle) != null;
+    }
+
+    public void saveProduct(Product product) {
+        productRepository.save(product);
+    }
 
     public Product saveOrUpdate(Product product) {
         return productRepository.save(product);

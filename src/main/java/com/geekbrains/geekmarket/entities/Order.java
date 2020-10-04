@@ -1,8 +1,12 @@
 package com.geekbrains.geekmarket.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "orders")
@@ -13,21 +17,43 @@ public class Order {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "quantity")
-    private Long quantity;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+//    @JsonBackReference
+    private User user;
 
-    @Column(name = "item_price")
-    private Double itemPrice;
-
-    @Column(name = "total_price")
-    private Double totalPrice;
+    @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "order", fetch = FetchType.EAGER)
+    private List<OrderItem> orderItems;
 
     @ManyToOne
-    @JoinColumn(name = "product_id")
-    private Product product;
+    @JoinColumn(name = "status_id")
+    private OrderStatus status;
 
-//    @ManyToOne
-//    @JoinColumn(name = "order_id")
-////    @JsonBackReference
-//    private Order order;
+    @Column(name = "price")
+    private Double price;
+
+    @Column(name = "delivery_price")
+    private Double deliveryPrice;
+
+    @ManyToOne
+    @JoinColumn(name = "delivery_address_id")
+    private DeliveryAddress deliveryAddress;
+
+    @Column(name = "phone_number")
+    private String phoneNumber;
+
+    @Column(name = "delivery_date")
+    private LocalDateTime deliveryDate;
+
+    @Column(name = "create_at")
+    @CreationTimestamp
+    private LocalDateTime createAt;
+
+    @Column(name = "update_at")
+    @CreationTimestamp
+    private LocalDateTime updateAt;
+
+    @JsonIgnore
+    @Transient
+    private boolean confirmed;
 }

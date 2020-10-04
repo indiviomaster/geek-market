@@ -47,8 +47,5 @@ public class SystemUser {
     @Column(name = "phone")
     private String phone;
 
-//    @NotNull
-//    @Min(value = 0, message = "value must be greater or equals than 0")
-//    @Max(value = 10, message = "value must be lesser or equals than 10")
-//    private Integer count;
+
 }

@@ -35,6 +35,7 @@ public class RegistrationController {
 
     @GetMapping("/showRegistrationForm")
     public String showMyLoginPage(Model model) {
+        //в представление передаем нового пользователя
         model.addAttribute("systemUser", new SystemUser());
         return "registration-form";
     }
@@ -53,7 +54,7 @@ public class RegistrationController {
         //если нового пользователя нет в базе то заводим его
         User existing = userService.findByUserName(userName);
         if (existing != null) {
-            systemUser.setUserName(null);
+            //systemUser.setUserName(null);
             model.addAttribute("systemUser", systemUser);
             model.addAttribute("registrationError", "Пользователь уже существует");
             logger.debug("User name already exists.");

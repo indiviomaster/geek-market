@@ -47,7 +47,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
 
-    //inmemory User
+
 //    @Override
 //    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 //        User.UserBuilder userBuilder = User.builder();
@@ -62,11 +62,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 //.antMatchers("/api/**").permitAll()
-                .antMatchers("/admin/**").hasAnyRole("ADMIN")
-                .antMatchers("/").hasAnyRole("USER", "ADMIN")
+                .antMatchers("/register/**").permitAll()
+                .antMatchers("/admin/**").hasRole("ADMIN")
+                .antMatchers("/products/**").hasRole("ADMIN")
+                .antMatchers("/shop/order/**").authenticated()
+                .antMatchers("/profile/**").authenticated()
+                //.antMatchers("/").hasAnyRole("USER", "ADMIN")
                 //.anyRequest().authenticated()
-                .and()
-                .csrf().ignoringAntMatchers("/api/**")
+                //.and()
+                //.csrf().ignoringAntMatchers("/api/**")
                 .and()
                 .formLogin()
                 .loginPage("/login")
@@ -76,6 +80,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .and()
                 .logout()
+                .logoutSuccessUrl("/shop")
                 .permitAll();
     }
 
