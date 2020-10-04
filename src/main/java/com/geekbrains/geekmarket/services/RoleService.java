@@ -1,15 +1,9 @@
 package com.geekbrains.geekmarket.services;
 
-import com.geekbrains.geekmarket.entities.Category;
-import com.geekbrains.geekmarket.entities.Product;
 import com.geekbrains.geekmarket.entities.Role;
-import com.geekbrains.geekmarket.repositories.CategoryRepository;
 import com.geekbrains.geekmarket.repositories.RoleRepository;
-import com.geekbrains.geekmarket.utils.CategoryNotFoundException;
 import com.geekbrains.geekmarket.utils.RoleNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -60,5 +54,6 @@ public class RoleService {
 
 
     public boolean isRoleWithNameExists(String name) {
+        return roleRepository.findOneByName(name) != null;
     }
 }

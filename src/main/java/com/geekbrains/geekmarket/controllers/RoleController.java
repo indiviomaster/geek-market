@@ -15,7 +15,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @Controller
-@RequestMapping("/Roles")
+@RequestMapping("/roles")
 public class RoleController {
     private RoleService roleService;
 
