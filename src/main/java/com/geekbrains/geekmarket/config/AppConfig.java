@@ -1,10 +1,7 @@
 package com.geekbrains.geekmarket.config;
 
 import org.springframework.boot.autoconfigure.web.servlet.WebMvcAutoConfiguration;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.annotation.*;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -15,6 +12,7 @@ import java.util.Locale;
 
 
 @Configuration
+@EnableAspectJAutoProxy
 @PropertySource("classpath:private.properties")
 @ComponentScan("com.geekbrains.geekmarket")
 public class AppConfig extends WebMvcAutoConfiguration {
