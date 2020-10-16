@@ -17,6 +17,14 @@ import java.util.List;
 @Table(name = "products")
 @Data
 public class Product implements Serializable {
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -35,6 +43,14 @@ public class Product implements Serializable {
 
     @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "product")
     private List<ProductImage> images;
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
     @Column(name = "title")
     @NotNull(message = "не может быть пустым")

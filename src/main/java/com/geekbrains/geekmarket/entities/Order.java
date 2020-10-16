@@ -32,8 +32,48 @@ public class Order {
     @Column(name = "price")
     private Double price;
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Double getDeliveryPrice() {
+        return deliveryPrice;
+    }
+
+    public void setDeliveryPrice(Double deliveryPrice) {
+        this.deliveryPrice = deliveryPrice;
+    }
+
+    public LocalDateTime getDeliveryDate() {
+        return deliveryDate;
+    }
+
+    public void setDeliveryDate(LocalDateTime deliveryDate) {
+        this.deliveryDate = deliveryDate;
+    }
+
     @Column(name = "delivery_price")
     private Double deliveryPrice;
+
+    public DeliveryAddress getDeliveryAddress() {
+        return deliveryAddress;
+    }
+
+    public void setDeliveryAddress(DeliveryAddress deliveryAddress) {
+        this.deliveryAddress = deliveryAddress;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
 
     @ManyToOne
     @JoinColumn(name = "delivery_address_id")

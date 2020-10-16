@@ -13,9 +13,25 @@ public class ProductImage {
     @Column(name = "id")
     private Long id;
 
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
     @ManyToOne
     @JoinColumn(name = "product_id")
     private Product product;
+
+    public String getPath() {
+        return path;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
+    }
 
     @Column(name = "path")
     private String path;

@@ -26,7 +26,7 @@ public class ShopController {
     private static final int INITIAL_PAGE = 0;
     private static final int PAGE_SIZE = 5;
 
-   // private MailService mailService;
+
     private UserService userService;
     private OrderService orderService;
     private DeliveryAddressService deliverAddressService;
@@ -57,11 +57,7 @@ public class ShopController {
         this.deliverAddressService = deliverAddressService;
     }
 
-    /*@Autowired
-    public void setMailService(MailService mailService) {
-        this.mailService = mailService;
-    }
-*/
+
     @GetMapping("")
     public String shopPage(Model model,
                            @RequestParam(value = "page") Optional<Integer> page,
@@ -74,15 +70,15 @@ public class ShopController {
         StringBuilder filters = new StringBuilder();
         if (word != null) {
             spec = spec.and(ProductSpecs.titleContains(word));
-            filters.append("&word=" + word);
+            filters.append("&word=").append(word);
         }
         if (min != null) {
             spec = spec.and(ProductSpecs.priceGreaterThanOrEq(min));
-            filters.append("&min=" + min);
+            filters.append("&min=").append(min);
         }
         if (max != null) {
             spec = spec.and(ProductSpecs.priceLesserThanOrEq(max));
-            filters.append("&max=" + max);
+            filters.append("&max=").append(max);
         }
 
         Page<Product> products = productService.getProductsWithPagingAndFiltering(currentPage, PAGE_SIZE, spec);
