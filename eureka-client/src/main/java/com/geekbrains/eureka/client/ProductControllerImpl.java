@@ -15,9 +15,9 @@ import com.geekbrains.geekmarket.services.ProductService;
 
 @RestController
 public class ProductControllerImpl implements ProductController {
-    @Autowired
+    /*@Autowired
     @Lazy
-    private final EurekaClient eurekaClient;
+    private final EurekaClient eurekaClient;*/
 
     private ProductService productService;
     private CategoryService categoryService;

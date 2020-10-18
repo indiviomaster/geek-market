@@ -4,9 +4,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class GeekEurekaClientApplication {
+public class EurekaClientProductApplication {
 	public static void main(String[] args) {
-		SpringApplication.run(GeekEurekaClientApplication.class, args);
+		SpringApplication.run(EurekaClientProductApplication.class, args);
 	}
 }
 
