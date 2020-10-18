@@ -3,11 +3,11 @@ var stompClient = null;
 window.onload = connect();
 
 function connect() {
-    var socket = new SockJS('/hello');
+    var socket = new SockJS('/geekmarket/hello');
     stompClient = Stomp.over(socket);
     stompClient.connect({}, function(frame) {
         console.log('Connected: ' + frame);
-        stompClient.subscribe('/topic/greetings', function(greeting){
+        stompClient.subscribe('/geekmarket/topic/greetings', function(greeting){
             showGreeting(JSON.parse(greeting.body).content);
         });
     });

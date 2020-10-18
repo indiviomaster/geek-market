@@ -256,17 +256,18 @@
 
             </plugin>
 
-            <!--<plugin>
+            <plugin>
                 <groupId>org.flywaydb</groupId>
                 <artifactId>flyway-maven-plugin</artifactId>
                 <version>5.2.1</version>
                 <configuration>
-                    <configFile>src/main/resources/flyway.conf</configFile>
+                    <configFile>/market/src/main/resources/flyway.conf</configFile>
                 </configuration>
-            </plugin>-->
+            </plugin>
 
         </plugins>
     </build>
+
     <dependencyManagement>
         <dependencies>
             <dependency>

@@ -8,6 +8,6 @@ import java.util.List;
 public interface ProductController {
 
     @RequestMapping("/products")
-    List<Product> getProducts();
-
+    //List<Product> getProducts();
+    String getProducts();
 }
