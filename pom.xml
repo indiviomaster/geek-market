@@ -141,10 +141,9 @@
             <artifactId>sql2o</artifactId>
             <version>1.6.0</version>
         </dependency>
+
         <!-- https://mvnrepository.com/artifact/commons-dbcp/commons-dbcp -->
-
-
-        <dependency>
+       <dependency>
             <groupId>commons-dbcp</groupId>
             <artifactId>commons-dbcp</artifactId>
             <version>1.2.2</version>
@@ -220,7 +219,7 @@
         <!--end websocket dependency-->
 
 
-        <!--<dependency>
+       <!-- <dependency>
             <groupId>org.flywaydb</groupId>
             <artifactId>flyway-core</artifactId>
             <version>5.2.1</version>
@@ -256,14 +255,14 @@
 
             </plugin>
 
-            <plugin>
+            <!--<plugin>
                 <groupId>org.flywaydb</groupId>
                 <artifactId>flyway-maven-plugin</artifactId>
                 <version>5.2.1</version>
                 <configuration>
                     <configFile>/market/src/main/resources/flyway.conf</configFile>
                 </configuration>
-            </plugin>
+            </plugin>-->
 
         </plugins>
     </build>
