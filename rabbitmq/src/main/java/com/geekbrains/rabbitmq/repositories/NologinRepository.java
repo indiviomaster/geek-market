@@ -11,4 +11,5 @@ import java.util.List;
 public interface NologinRepository extends JpaRepository<Nologin, Long> {
 
     List<Nologin>  findAll();
+
 }

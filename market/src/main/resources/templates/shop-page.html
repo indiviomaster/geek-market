@@ -60,7 +60,7 @@
             <td th:text="${iterStat.index}"/>
             <td th:text="${product.id}"/>
             <td>
-                <img th:if="${product.images.size() > 0}" width="40" height="40" th:src="@{'/images/' + ${product.images[0].path}}" />
+                <img th:if="${product.images.size() > 0}" width="40" height="40" th:src="@{'./images/' + ${product.images[0].path}}" />
             </td>
             <td th:text="${product.title}"/>
             <td th:text="${product.price}"/>

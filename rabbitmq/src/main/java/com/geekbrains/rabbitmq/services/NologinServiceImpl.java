@@ -1,5 +1,7 @@
 package com.geekbrains.rabbitmq.services;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.geekbrains.rabbitmq.entity.Nologin;
 import com.geekbrains.rabbitmq.repositories.NologinRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +21,16 @@ public class NologinServiceImpl implements NologinService {
 
 	@Override
 	@Transactional
-	public void save(Nologin nologin) {
+	public void save(Nologin nologin) throws JsonProcessingException {
+
+		ObjectMapper mapper = new ObjectMapper();
+		String noLoginAsString = mapper.writeValueAsString(nologin);
+		System.out.println(noLoginAsString);
+		nologin = mapper.readValue(noLoginAsString, Nologin.class);
+
 		nologinRepository.save(nologin);
 	}
+
+
 
 }
