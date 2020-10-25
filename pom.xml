@@ -11,6 +11,7 @@
         <module>config-server</module>
         <module>market</module>
         <module>eureka-client</module>
+        <module>rabbitmq</module>
     </modules>
     <packaging>pom</packaging>
 
@@ -218,8 +219,8 @@
         </dependency>
         <!--end websocket dependency-->
 
-
-       <!-- <dependency>
+        <!--FLYWAY DEPENDENCY-->
+        <!-- <dependency>
             <groupId>org.flywaydb</groupId>
             <artifactId>flyway-core</artifactId>
             <version>5.2.1</version>
@@ -230,6 +231,23 @@
             <version>1.18.4</version>
             <scope>provided</scope>
         </dependency>
+        <!--FLYWAY DEPENDENCY-->
+
+        <!-- SLF4J  -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>1.7.26</version>
+        </dependency>
+        <!-- SLF4J  -->
+
+        <!-- RABBITMQ QUEUE  -->
+        <dependency>
+            <groupId>com.rabbitmq</groupId>
+            <artifactId>amqp-client</artifactId>
+            <version>5.7.0</version>
+        </dependency>
+        <!-- RABBITMQ QUEUE  -->
     </dependencies>
 
     <build>
