@@ -10,8 +10,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-
 
 @SpringBootApplication
 public class RabbitReaderApplication {
@@ -21,17 +19,7 @@ public class RabbitReaderApplication {
         SpringApplication.run(RabbitReaderApplication.class, args);
 
     }
-    /*@Bean
-    public CommandLineRunner testApp(NologinRepository nologinRepository) {
-        return args -> {
-            nologinRepository.save(new Nologin("James"));
-            nologinRepository.save(new Nologin("Selena"));
 
-            List<Nologin> allNologin = nologinRepository.findAll();
-            System.out.println("All in DB: " + allNologin);
-
-        };
-    }*/
 
     @Bean
     public CommandLineRunner demo(NologinRepository nologinRepository) {

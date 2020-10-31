@@ -16,11 +16,7 @@ import java.util.Locale;
 @ComponentScan("com.geekbrains.geekmarket")
 public class AppConfig extends WebMvcAutoConfiguration {
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-       /*if (!registry.hasMappingForPattern("/webjars/**")) {
-            registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/");
-        }*/
 
-        //контроллер доступа к файлам, обработка изображений/ картинок
         if (!registry.hasMappingForPattern("/images/**")) {
             registry.addResourceHandler("/images/**").addResourceLocations("file:./images/");
         }
